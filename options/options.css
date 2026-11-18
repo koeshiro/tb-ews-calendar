@@ -1,0 +1,88 @@
+body {
+  font: message-box;
+  max-width: 640px;
+  margin: 2em auto;
+  padding: 0 1em;
+  color: inherit;
+}
+
+h1 {
+  font-size: 1.3em;
+}
+h2 {
+  font-size: 1.1em;
+  margin-bottom: 0.4em;
+}
+
+label {
+  display: block;
+  margin: 0.7em 0;
+}
+label span {
+  display: block;
+  margin-bottom: 0.2em;
+}
+label input:not([type="checkbox"]),
+label select {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 3px 5px;
+}
+label.checkbox input {
+  width: auto;
+  margin-right: 0.4em;
+}
+
+.row {
+  margin-top: 1em;
+  display: flex;
+  gap: 0.6em;
+}
+
+button.primary {
+  font-weight: bold;
+}
+
+.muted {
+  color: gray;
+  font-size: 0.95em;
+}
+
+.calendar-row {
+  display: flex;
+  align-items: center;
+  gap: 0.6em;
+  padding: 0.5em 0;
+  border-bottom: 1px solid rgba(128, 128, 128, 0.3);
+}
+.calendar-row .title {
+  font-weight: bold;
+}
+.calendar-row .sub {
+  color: gray;
+}
+.calendar-row .grow {
+  flex: 1;
+}
+.calendar-row .dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  display: inline-block;
+}
+.dot.ok {
+  background: #2e9e44;
+}
+.dot.fail {
+  background: #d33;
+}
+.dot.none {
+  background: gray;
+}
+
+#status-line {
+  margin-top: 1.5em;
+}
+#status-line.error {
+  color: #d33;
+}

@@ -1,0 +1,194 @@
+[
+  {
+    "namespace": "ews",
+    "description": "Exchange EWS calendar provider: manage calendars, trigger sync, respond to meeting invitations.",
+    "functions": [
+      {
+        "name": "listCalendars",
+        "type": "function",
+        "async": true,
+        "parameters": [],
+        "returns": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": { "type": "string" },
+              "name": { "type": "string" },
+              "url": { "type": "string" },
+              "email": { "type": "string" },
+              "authMethod": { "type": "string" },
+              "refreshInterval": { "type": "integer" },
+              "readOnly": { "type": "boolean" },
+              "hasPassword": { "type": "boolean" },
+              "lastSyncOk": { "type": "boolean" },
+              "lastSyncError": { "type": "string" },
+              "lastSyncTime": { "type": "string" },
+              "lastSyncCount": { "type": "integer", "optional": true }
+            }
+          }
+        }
+      },
+      {
+        "name": "createCalendar",
+        "type": "function",
+        "async": true,
+        "parameters": [
+          {
+            "name": "config",
+            "type": "object",
+            "properties": {
+              "url": { "type": "string" },
+              "email": { "type": "string" },
+              "displayName": { "type": "string", "optional": true },
+              "authMethod": { "type": "string", "optional": true, "description": "'basic' or 'auto' (Basic, then Windows SSO on 401)." },
+              "password": { "type": "string", "optional": true },
+              "refreshInterval": { "type": "integer", "optional": true, "description": "Minutes between syncs." },
+              "readOnly": { "type": "boolean", "optional": true }
+            },
+            "required": ["url", "email"]
+          }
+        ],
+        "returns": {
+          "type": "object",
+          "properties": {
+            "id": { "type": "string", "optional": true },
+            "error": { "type": "string", "optional": true }
+          }
+        }
+      },
+      {
+        "name": "updateCalendar",
+        "type": "function",
+        "async": true,
+        "parameters": [
+          { "name": "calendarId", "type": "string" },
+          {
+            "name": "config",
+            "type": "object",
+            "description": "Absent password keeps the stored one; empty string clears it.",
+            "properties": {
+              "url": { "type": "string", "optional": true },
+              "email": { "type": "string", "optional": true },
+              "displayName": { "type": "string", "optional": true },
+              "authMethod": { "type": "string", "optional": true },
+              "password": { "type": "string", "optional": true },
+              "refreshInterval": { "type": "integer", "optional": true },
+              "readOnly": { "type": "boolean", "optional": true }
+            }
+          }
+        ],
+        "returns": {
+          "type": "object",
+          "properties": {
+            "ok": { "type": "boolean" },
+            "error": { "type": "string", "optional": true }
+          }
+        }
+      },
+      {
+        "name": "removeCalendar",
+        "type": "function",
+        "async": true,
+        "parameters": [{ "name": "calendarId", "type": "string" }],
+        "returns": {
+          "type": "object",
+          "properties": {
+            "ok": { "type": "boolean" },
+            "error": { "type": "string", "optional": true }
+          }
+        }
+      },
+      {
+        "name": "syncNow",
+        "type": "function",
+        "async": true,
+        "parameters": [
+          {
+            "name": "calendarId",
+            "type": "string",
+            "optional": true,
+            "description": "Sync only this calendar; omit to sync all ews calendars."
+          }
+        ],
+        "returns": {
+          "type": "object",
+          "properties": {
+            "ok": { "type": "boolean" },
+            "error": { "type": "string", "optional": true }
+          }
+        }
+      },
+      {
+        "name": "testConnection",
+        "type": "function",
+        "async": true,
+        "parameters": [
+          {
+            "name": "config",
+            "type": "object",
+            "description": "Values from the settings form. Omit password to use the stored one.",
+            "properties": {
+              "url": { "type": "string" },
+              "email": { "type": "string" },
+              "authMethod": { "type": "string", "optional": true },
+              "password": { "type": "string", "optional": true }
+            },
+            "required": ["url"]
+          },
+          {
+            "name": "calendarId",
+            "type": "string",
+            "optional": true,
+            "description": "Fill missing fields (password) from this stored calendar."
+          }
+        ],
+        "returns": {
+          "type": "object",
+          "properties": {
+            "ok": { "type": "boolean" },
+            "httpCode": { "type": "integer" },
+            "authPath": { "type": "string", "optional": true },
+            "error": { "type": "string", "optional": true }
+          }
+        }
+      },
+      {
+        "name": "getSelectedEvent",
+        "type": "function",
+        "async": true,
+        "parameters": [],
+        "returns": {
+          "type": "object",
+          "optional": true,
+          "properties": {
+            "calendarId": { "type": "string" },
+            "calendarName": { "type": "string" },
+            "itemId": { "type": "string", "description": "Raw EWS ItemId (without the 'ews:' prefix)." },
+            "title": { "type": "string" },
+            "startISO": { "type": "string" },
+            "endISO": { "type": "string" },
+            "isInvitation": { "type": "boolean" }
+          }
+        }
+      },
+      {
+        "name": "respondToMeeting",
+        "type": "function",
+        "async": true,
+        "parameters": [
+          { "name": "calendarId", "type": "string" },
+          { "name": "itemId", "type": "string" },
+          { "name": "response", "type": "string", "description": "'Accept', 'Tentative' or 'Decline'." }
+        ],
+        "returns": {
+          "type": "object",
+          "properties": {
+            "ok": { "type": "boolean" },
+            "error": { "type": "string", "optional": true }
+          }
+        }
+      }
+    ]
+  }
+]

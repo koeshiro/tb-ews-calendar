@@ -1,0 +1,44 @@
+{
+  "manifest_version": 2,
+  "name": "Exchange EWS Calendar",
+  "version": "0.4.9",
+  "description": "Lightning calendar provider for Microsoft Exchange / EWS. View, edit, and respond to meeting invitations.",
+  "author": "tb-ews-calendar",
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "{9f2c4e7a-3b6d-4c1e-8a5f-7d2b9e0c1a34}",
+      "strict_min_version": "128.0",
+      "strict_max_version": "163.*"
+    }
+  },
+  "experiment_apis": {
+    "ews": {
+      "schema": "experiments/ews/schema.json",
+      "parent": {
+        "scopes": ["addon_parent"],
+        "paths": [["ews"]],
+        "script": "experiments/ews/api.js",
+        "events": ["startup"]
+      }
+    }
+  },
+  "options_ui": {
+    "page": "options/options.html",
+    "open_in_tab": true
+  },
+  "browser_action": {
+    "default_title": "Exchange EWS Calendar",
+    "default_popup": "popup/popup.html",
+    "default_icon": {
+      "16": "icons/ews-16.png",
+      "32": "icons/ews-32.png",
+      "48": "icons/ews-48.png"
+    }
+  },
+  "default_locale": "en",
+  "icons": {
+    "16": "icons/ews-16.png",
+    "32": "icons/ews-32.png",
+    "48": "icons/ews-48.png"
+  }
+}

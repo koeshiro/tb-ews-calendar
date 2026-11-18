@@ -1,0 +1,47 @@
+body {
+  font: message-box;
+  width: 260px;
+  padding: 10px;
+  box-sizing: border-box;
+}
+
+button.primary {
+  font-weight: bold;
+}
+
+#btn-sync {
+  width: 100%;
+}
+
+.muted-btn {
+  width: 100%;
+  margin-top: 8px;
+  color: gray;
+}
+
+#event-block {
+  margin-top: 10px;
+  padding-top: 8px;
+  border-top: 1px solid rgba(128, 128, 128, 0.4);
+}
+#event-title {
+  font-weight: bold;
+  margin-bottom: 2px;
+  word-break: break-word;
+}
+#event-time {
+  margin-bottom: 6px;
+}
+
+.row {
+  display: flex;
+  gap: 5px;
+}
+.row button {
+  flex: 1;
+  padding: 4px 2px;
+}
+
+#hint {
+  margin-top: 8px;
+}

@@ -1,0 +1,10 @@
+{
+  "name": "tb-ews-calendar",
+  "version": "0.4.9",
+  "private": true,
+  "description": "Thunderbird add-on: Lightning calendar provider over Exchange EWS",
+  "scripts": {
+    "build": "node build/build.mjs",
+    "test:ews": "node test/ews.test.mjs"
+  }
+}
